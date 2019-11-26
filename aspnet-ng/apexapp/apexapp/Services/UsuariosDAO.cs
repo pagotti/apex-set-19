@@ -11,7 +11,7 @@ namespace apexapp.Services
     public class UsuariosDAO
     {
 
-        private string string_conexao = ApexAppContext.Configuration.GetConnectionString("ApexApp");
+        private string string_conexao = ApexAppDBContext.Configuration.GetConnectionString("ApexApp");
 
         public List<Usuario> RetornarUsuarios()
         {

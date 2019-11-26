@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace apexapp.Services
 {
-    public class ApexAppContext
+    public class ApexAppDBContext
     {
         public static IConfiguration Configuration { get; set; }
     }
