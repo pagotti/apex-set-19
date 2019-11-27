@@ -1,8 +1,10 @@
+using apexapp.Models;
 using apexapp.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -22,7 +24,14 @@ namespace apexapp
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            ApexAppContext.Configuration = Configuration;
+
+            ApexAppDBContext.Configuration = Configuration;
+
+            services.AddDbContext<ApexAppContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("ApexApp"));
+            });
+
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
