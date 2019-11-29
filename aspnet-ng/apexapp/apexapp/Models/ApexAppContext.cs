@@ -15,6 +15,8 @@ namespace apexapp.Models
 
         public DbSet<ItemPedido> ItensPedidos { get; set; }
 
+        public DbSet<Cliente> Clientes { get; set; }
+
         public ApexAppContext(DbContextOptions<ApexAppContext> options)
             :base(options)
                 {

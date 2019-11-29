@@ -23,6 +23,10 @@ namespace apexapp.Models
             [Required]
             [Display (Name = "Forma de Pagamento")]
             public FormaPagamento Forma { get; set; }
+
+            public StatusPedido Status { get; set; }
+            
+
   
     }
 }
