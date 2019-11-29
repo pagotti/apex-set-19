@@ -11,56 +11,56 @@ namespace apexapp.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ItensPedidoController : ControllerBase
+    public class ClientesController : ControllerBase
     {
         private readonly ApexAppContext _context;
 
-        public ItensPedidoController(ApexAppContext context)
+        public ClientesController(ApexAppContext context)
         {
             _context = context;
         }
 
-        // GET: api/ItensPedido
+        // GET: api/Clientes
         [HttpGet]
-        public IEnumerable<ItemPedido> GetItensPedido()
+        public IEnumerable<Cliente> GetClientes()
         {
-            return _context.ItensPedido;
+            return _context.Clientes;
         }
 
-        // GET: api/ItensPedido/5
+        // GET: api/Clientes/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetItemPedido([FromRoute] int id)
+        public async Task<IActionResult> GetCliente([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var itemPedido = await _context.ItensPedido.FindAsync(id);
+            var cliente = await _context.Clientes.FindAsync(id);
 
-            if (itemPedido == null)
+            if (cliente == null)
             {
                 return NotFound();
             }
 
-            return Ok(itemPedido);
+            return Ok(cliente);
         }
 
-        // PUT: api/ItensPedido/5
+        // PUT: api/Clientes/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutItemPedido([FromRoute] int id, [FromBody] ItemPedido itemPedido)
+        public async Task<IActionResult> PutCliente([FromRoute] int id, [FromBody] Cliente cliente)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != itemPedido.Id)
+            if (id != cliente.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(itemPedido).State = EntityState.Modified;
+            _context.Entry(cliente).State = EntityState.Modified;
 
             try
             {
@@ -68,7 +68,7 @@ namespace apexapp.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ItemPedidoExists(id))
+                if (!ClienteExists(id))
                 {
                     return NotFound();
                 }
@@ -81,49 +81,45 @@ namespace apexapp.Controllers
             return NoContent();
         }
 
-        // POST: api/ItensPedido
+        // POST: api/Clientes
         [HttpPost]
-        public async Task<IActionResult> PostItemPedido([FromBody] ItemPedido itemPedido)
+        public async Task<IActionResult> PostCliente([FromBody] Cliente cliente)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            // buscar o preço do produto que está no item.
-            Produto produto = _context.Produtos.Find(itemPedido.ProdutoId);
-            itemPedido.Preco = produto.Preco;
-
-            _context.ItensPedido.Add(itemPedido);
+            _context.Clientes.Add(cliente);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetItemPedido", new { id = itemPedido.Id }, itemPedido);
+            return CreatedAtAction("GetCliente", new { id = cliente.Id }, cliente);
         }
 
-        // DELETE: api/ItensPedido/5
+        // DELETE: api/Clientes/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteItemPedido([FromRoute] int id)
+        public async Task<IActionResult> DeleteCliente([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var itemPedido = await _context.ItensPedido.FindAsync(id);
-            if (itemPedido == null)
+            var cliente = await _context.Clientes.FindAsync(id);
+            if (cliente == null)
             {
                 return NotFound();
             }
 
-            _context.ItensPedido.Remove(itemPedido);
+            _context.Clientes.Remove(cliente);
             await _context.SaveChangesAsync();
 
-            return Ok(itemPedido);
+            return Ok(cliente);
         }
 
-        private bool ItemPedidoExists(int id)
+        private bool ClienteExists(int id)
         {
-            return _context.ItensPedido.Any(e => e.Id == id);
+            return _context.Clientes.Any(e => e.Id == id);
         }
     }
 }

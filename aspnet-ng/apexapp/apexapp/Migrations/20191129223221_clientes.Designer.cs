@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using apexapp.Models;
 
 namespace apexapp.Migrations
 {
     [DbContext(typeof(ApexAppContext))]
-    partial class ApexAppContextModelSnapshot : ModelSnapshot
+    [Migration("20191129223221_clientes")]
+    partial class clientes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -63,8 +65,6 @@ namespace apexapp.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ClienteId");
-
                     b.Property<DateTime>("Data");
 
                     b.Property<int>("Forma");
@@ -74,8 +74,6 @@ namespace apexapp.Migrations
                     b.Property<decimal>("Total");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ClienteId");
 
                     b.ToTable("Pedidos");
                 });
@@ -111,13 +109,6 @@ namespace apexapp.Migrations
                         .WithMany()
                         .HasForeignKey("ProdutoId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("apexapp.Models.Pedido", b =>
-                {
-                    b.HasOne("apexapp.Models.Cliente", "Cliente")
-                        .WithMany()
-                        .HasForeignKey("ClienteId");
                 });
 #pragma warning restore 612, 618
         }

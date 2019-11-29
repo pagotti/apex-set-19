@@ -60,6 +60,13 @@ namespace apexapp.Controllers
                 return BadRequest();
             }
 
+            if (pedido.Status == StatusPedido.Carrinho)
+            {
+                pedido.Total = _context.ItensPedido.
+                    Where(x => x.PedidoId == pedido.Id).
+                    Sum(x => x.Quantidade * x.Preco);
+            }
+
             _context.Entry(pedido).State = EntityState.Modified;
 
             try
