@@ -11,63 +11,56 @@ namespace apexapp.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PedidosController : ControllerBase
+    public class ItensPedidoController : ControllerBase
     {
         private readonly ApexAppContext _context;
 
-        public PedidosController(ApexAppContext context)
+        public ItensPedidoController(ApexAppContext context)
         {
             _context = context;
         }
 
-        // GET: api/Pedidos
+        // GET: api/ItensPedido
         [HttpGet]
-        public IEnumerable<Pedido> GetPedidos()
+        public IEnumerable<ItemPedido> GetItensPedido()
         {
-            return _context.Pedidos;
+            return _context.ItensPedido;
         }
 
-        // GET: api/Pedidos/5
+        // GET: api/ItensPedido/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetPedido([FromRoute] int id)
+        public async Task<IActionResult> GetItemPedido([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var pedido = await _context.Pedidos.FindAsync(id);
+            var itemPedido = await _context.ItensPedido.FindAsync(id);
 
-            if (pedido == null)
+            if (itemPedido == null)
             {
                 return NotFound();
             }
 
-            return Ok(pedido);
+            return Ok(itemPedido);
         }
 
-        // PUT: api/Pedidos/5
+        // PUT: api/ItensPedido/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPedido([FromRoute] int id, [FromBody] Pedido pedido)
+        public async Task<IActionResult> PutItemPedido([FromRoute] int id, [FromBody] ItemPedido itemPedido)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (pedido.Status == StatusPedido.Carrinho)
-            {
-                pedido.Total = _context.ItensPedido.
-                    Where(x => x.PedidoId == pedido.Id).
-                    Sum(x => x.Quantidade * x.Preco);
-            }
-
-            if (id != pedido.Id)
+            if (id != itemPedido.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(pedido).State = EntityState.Modified;
+            _context.Entry(itemPedido).State = EntityState.Modified;
 
             try
             {
@@ -75,7 +68,7 @@ namespace apexapp.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!PedidoExists(id))
+                if (!ItemPedidoExists(id))
                 {
                     return NotFound();
                 }
@@ -88,45 +81,49 @@ namespace apexapp.Controllers
             return NoContent();
         }
 
-        // POST: api/Pedidos
+        // POST: api/ItensPedido
         [HttpPost]
-        public async Task<IActionResult> PostPedido([FromBody] Pedido pedido)
+        public async Task<IActionResult> PostItemPedido([FromBody] ItemPedido itemPedido)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _context.Pedidos.Add(pedido);
+            // buscar o preço do produto que está no item.
+            Produto produto = _context.Produtos.Find(itemPedido.ProdutoId);
+            itemPedido.Preco = produto.Preco;
+
+            _context.ItensPedido.Add(itemPedido);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetPedido", new { id = pedido.Id }, pedido);
+            return CreatedAtAction("GetItemPedido", new { id = itemPedido.Id }, itemPedido);
         }
 
-        // DELETE: api/Pedidos/5
+        // DELETE: api/ItensPedido/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePedido([FromRoute] int id)
+        public async Task<IActionResult> DeleteItemPedido([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var pedido = await _context.Pedidos.FindAsync(id);
-            if (pedido == null)
+            var itemPedido = await _context.ItensPedido.FindAsync(id);
+            if (itemPedido == null)
             {
                 return NotFound();
             }
 
-            _context.Pedidos.Remove(pedido);
+            _context.ItensPedido.Remove(itemPedido);
             await _context.SaveChangesAsync();
 
-            return Ok(pedido);
+            return Ok(itemPedido);
         }
 
-        private bool PedidoExists(int id)
+        private bool ItemPedidoExists(int id)
         {
-            return _context.Pedidos.Any(e => e.Id == id);
+            return _context.ItensPedido.Any(e => e.Id == id);
         }
     }
 }

@@ -25,8 +25,14 @@ namespace apexapp.Models
             public FormaPagamento Forma { get; set; }
 
             public StatusPedido Status { get; set; }
-            
 
-  
+        [ForeignKey("Cliente")]
+        public int? ClienteId { get; set; }
+
+        public Cliente Cliente { get; set; }
+
+
+
+
     }
 }

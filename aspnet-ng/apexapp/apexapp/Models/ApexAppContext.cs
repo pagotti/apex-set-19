@@ -13,7 +13,7 @@ namespace apexapp.Models
 
         public DbSet<Pedido> Pedidos { get; set; }
 
-        public DbSet<ItemPedido> ItensPedidos { get; set; }
+        public DbSet<ItemPedido> ItensPedido { get; set; }
 
         public DbSet<Cliente> Clientes { get; set; }
 

@@ -6,9 +6,14 @@ using System.Threading.Tasks;
 namespace apexapp.Models
 {
     public class Cliente
-    { 
-            public int Id { get; set; }
-            public string Nome { get; set; }
-            public DateTime DataNascimento { get; set; }   
+    {
+        [Key]
+        public int Id { get; set; }
+
+        public string Nome { get; set; }
+
+        [Display(Name = "Data de Nascimento")]
+        public DateTime DataNascimento { get; set; }
+
     }
 }

@@ -3,7 +3,7 @@
     public enum FormaPagamento
     {
         Dinheiro,
-        Crédito,
+        Credito,
         Debito
     }
 }
