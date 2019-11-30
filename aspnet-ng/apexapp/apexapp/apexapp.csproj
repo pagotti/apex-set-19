@@ -33,6 +33,8 @@
   <ItemGroup>
     <Compile Remove="Migrations\20191129223752_cliente-pedido.cs" />
     <Compile Remove="Migrations\20191129223752_cliente-pedido.Designer.cs" />
+    <Compile Remove="Migrations\20191130005709_teste.cs" />
+    <Compile Remove="Migrations\20191130005709_teste.Designer.cs" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

@@ -124,6 +124,13 @@ namespace apexapp.Controllers
             return Ok(pedido);
         }
 
+        [HttpGet]
+        [Route("/api/Pedidos/Status/{status}")]
+        public IEnumerable<Pedido> GetPedidosStatus(StatusPedido status)
+        {
+            return _context.Pedidos.Where(x => x.Status == status);
+        }
+
         private bool PedidoExists(int id)
         {
             return _context.Pedidos.Any(e => e.Id == id);

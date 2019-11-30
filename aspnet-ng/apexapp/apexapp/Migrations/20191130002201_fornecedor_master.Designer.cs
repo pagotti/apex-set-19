@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using apexapp.Models;
 
 namespace apexapp.Migrations
 {
     [DbContext(typeof(ApexAppContext))]
-    partial class ApexAppContextModelSnapshot : ModelSnapshot
+    [Migration("20191130002201_fornecedor_master")]
+    partial class fornecedor_master
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,7 +50,7 @@ namespace apexapp.Migrations
 
                     b.HasIndex("RamoAtividadeId");
 
-                    b.ToTable("Fornecedores");
+                    b.ToTable("Fornecedor");
                 });
 
             modelBuilder.Entity("apexapp.Models.ItemPedido", b =>
@@ -131,7 +133,7 @@ namespace apexapp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("RamoAtividades");
+                    b.ToTable("RamoAtividade");
                 });
 
             modelBuilder.Entity("apexapp.Models.Fornecedor", b =>

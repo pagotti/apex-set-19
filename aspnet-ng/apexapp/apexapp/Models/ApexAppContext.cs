@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using apexapp.Models;
 
 namespace apexapp.Models
 {
@@ -17,9 +18,14 @@ namespace apexapp.Models
 
         public DbSet<Cliente> Clientes { get; set; }
 
+        public DbSet<RamoAtividade> RamoAtividades { get; set; }
+
+        public DbSet<Fornecedor> Fornecedores { get; set; }
+
         public ApexAppContext(DbContextOptions<ApexAppContext> options)
             :base(options)
         {
         }
+
     }
 }
