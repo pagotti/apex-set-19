@@ -10,6 +10,9 @@ import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { AppUsuarioComponent } from './app-usuario/app-usuario.component';
+import { VitrineComponent } from './vitrine/vitrine.component';
+import { CarrinhoComponent } from './carrinho/carrinho.component';
+import { PagamentoComponent } from './pagamento/pagamento.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +21,10 @@ import { AppUsuarioComponent } from './app-usuario/app-usuario.component';
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
-    AppUsuarioComponent
+    AppUsuarioComponent,
+    VitrineComponent,
+    CarrinhoComponent,
+    PagamentoComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -29,6 +35,9 @@ import { AppUsuarioComponent } from './app-usuario/app-usuario.component';
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'usuario', component: AppUsuarioComponent },
+      { path: 'loja', component: VitrineComponent },
+      { path: 'carrinho/:id', component: CarrinhoComponent },
+      { path: 'pagamento/:id', component: PagamentoComponent },
     ])
   ],
   providers: [],

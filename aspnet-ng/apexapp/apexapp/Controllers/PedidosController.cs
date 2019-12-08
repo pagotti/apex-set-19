@@ -131,6 +131,16 @@ namespace apexapp.Controllers
             return _context.Pedidos.Where(x => x.Status == status);
         }
 
+        [HttpGet]
+        [Route("/api/Pedidos/{id}/Itens")]
+        public Pedido GetItensPedido(int id)
+        {
+            var pedido = _context.Pedidos.Include(p => p.Itens).
+                ThenInclude(p => p.Produto).
+                FirstOrDefault(x => x.Id == id);
+            return pedido;
+        }
+
         private bool PedidoExists(int id)
         {
             return _context.Pedidos.Any(e => e.Id == id);

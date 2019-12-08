@@ -1,0 +1,32 @@
+<h1>Carrinho de Compra</h1>
+
+<p *ngIf="!carrinho"><em>Loading...</em></p>
+
+<div *ngIf="carrinho">
+  <h2>Pedido: {{carrinho.id}}  - Data: {{carrinho.data | date:'dd/MM/yyyy'}}</h2>
+
+  <table class='table'>
+    <thead>
+      <tr>
+        <th>Produto</th>
+        <th>Quantidade</th>
+        <th>Preço</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of carrinho.itens">
+        <td>{{ item.produto.nome }}</td>
+        <td>{{ item.quantidade }}</td>
+        <td>{{ item.preco }}</td>
+        <td>
+          <button class="btn btn-sm btn-danger" type="button" (click)="excluir(item)">Excluir</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <button class="btn btn-sm btn-success" type="button" (click)="pagar()" *ngIf="carrinho.itens.length > 0">Pagar</button>
+  <a class="btn btn-sm btn-default" routerLink="/loja" *ngIf="carrinho.itens.length == 0">Voltar para Loja</a>
+
+</div>

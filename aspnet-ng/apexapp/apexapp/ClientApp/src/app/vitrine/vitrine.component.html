@@ -1,0 +1,26 @@
+<h1>Vitrine de Produtos</h1>
+
+<div *ngIf="produtos">
+  <div class="row">
+    <div class="text-left col-sm-6">
+      Escolha os produtos colocando no carrinho com o botão 'Adicionar'
+    </div>
+    <div class="text-right col-sm-6">
+      <button type="button" class="btn btn-danger" (click)="fechaCarrinho()">Ir para o Carrinho (<small>{{carrinho}}</small>)</button>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <div class="row" *ngFor="let produtosOf3 of chunk(produtos, 3)">
+      <div *ngFor="let produto of produtosOf3" class="col-4 col-sm-4">
+        <div class="thumbnail">
+          <div class="caption">
+            <h4>{{produto.nome}}</h4>
+            <p class="card-text">{{produto.descricao}}</p>
+            <button type="button" class="btn btn-primary" (click)="add(produto)">Adicionar ao Carrinho</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+<h1>Pagamento</h1>
+
+<p *ngIf="!pedido"><em>Loading...</em></p>
+
+<div *ngIf="pedido">
+  <h2>Pedido: {{pedido.id}}</h2>
+  <h3>Data: {{pedido.data | date:'dd/MM/yyyy'}}</h3>
+  <h3>Total: {{pedido.total | currency }}</h3>
+  
+  <h3>Forma de Pagamento</h3>
+  <select *ngIf="formas" class="form-control" [(ngModel)]="formaSelecionada">
+    <option *ngFor="let f of formas" [ngValue]="f">
+      {{f.nome}}
+    </option>
+  </select>
+
+  <br />
+  <a class="btn btn-sm btn-success" (click)="pagar()">Pagar</a>
+  <a class="btn btn-sm btn-default" routerLink="/loja">Cancelar e voltar para a Loja</a>
+
+</div>

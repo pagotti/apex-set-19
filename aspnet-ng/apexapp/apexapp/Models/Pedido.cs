@@ -30,5 +30,7 @@ namespace apexapp.Models
 
         public Cliente Cliente { get; set; }
 
+        public List<ItemPedido> Itens { get; set; }
+
     }
 }
